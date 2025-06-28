@@ -1,0 +1,42 @@
+# A linha 'version' não é mais necessária, pode ser removida.
+services:
+  app:
+    build: .
+    container_name: DeskPet
+    ports:
+      - "8080:8080"
+    volumes:
+      # O caminho correto para o log do WildFly é 'log' (singular)
+      - ./logs:/opt/jboss/wildfly/standalone/log # <-- MUDANÇA
+    environment:
+      # Passando as variáveis que o código Java irá procurar
+      DB_HOST: postgres # <-- MUDANÇA (Usa o nome do serviço, não o container_name)
+      DB_NAME: deskpet
+      DB_USER: postgres
+      DB_PASS: "94786422Wp$" # <-- MUDANÇA
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:16
+    # O container_name é opcional, a comunicação é feita pelo nome do serviço ('db')
+    container_name: db_postgres
+    environment:
+      POSTGRES_DB: deskpet
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "94786422Wp$" # <-- MUDANÇA
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:

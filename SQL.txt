@@ -1,0 +1,61 @@
+CREATE TABLE cliente_usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+	cnpj VARCHAR(18),
+    telefone VARCHAR(20)NOT NULL,
+    endereco TEXT,
+	plano VARCHAR(50) NOT NULL,
+    nome_empresa VARCHAR(100)
+);
+
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,  -- senha criptografada --
+	ativo BOOLEAN DEFAULT TRUE,
+    cliente_usuario_id INTEGER REFERENCES cliente_usuario(id) ON DELETE CASCADE
+);
+
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+	cpf VARCHAR(14),
+	endereco TEXT,
+    data_criacao TIMESTAMP DEFAULT NOW(),
+    cliente_usuario_id INTEGER REFERENCES cliente_usuario(id) ON DELETE CASCADE  -- Garante que o cliente pertence a um usuário
+);
+
+CREATE TABLE pet (
+    id SERIAL PRIMARY KEY,
+    nomepet VARCHAR(100) NOT NULL,
+	especie VARCHAR(100) NOT NULL,
+	raca VARCHAR(100) NOT NULL,
+	sexo VARCHAR (10) NOT NULL,
+	descricao TEXT,
+    data_criacao TIMESTAMP DEFAULT NOW(),
+	cliente_usuario_id INTEGER REFERENCES cliente_usuario(id) ON DELETE CASCADE,
+    tutor_id INTEGER REFERENCES clientes(id) ON DELETE CASCADE  -- Garante que o pet pertence a um tutor
+);
+
+CREATE TABLE servico (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    valor DECIMAL(10,2) NOT NULL,
+    cliente_usuario_id INTEGER REFERENCES cliente_usuario(id) ON DELETE CASCADE -- serviço é do petshop
+);
+
+CREATE TABLE agendamento (
+    id SERIAL PRIMARY KEY,
+    pet_id INTEGER REFERENCES pet(id) ON DELETE CASCADE,
+    tutor_id INTEGER REFERENCES clientes(id) ON DELETE CASCADE,
+    servico_id INTEGER REFERENCES servico(id) ON DELETE CASCADE,
+    data_hora TIMESTAMP NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    pagamento_efetuado BOOLEAN DEFAULT FALSE,
+    status VARCHAR(20) DEFAULT 'Agendado',
+    cliente_usuario_id INTEGER REFERENCES cliente_usuario(id) ON DELETE CASCADE  -- petshop que gerencia o agendamento
+);
+

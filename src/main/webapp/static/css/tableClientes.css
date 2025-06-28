@@ -1,0 +1,153 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    padding: 20px;
+}
+
+/* Container geral */
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Títulos */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #1e8449;
+}
+
+.btn-success {
+    background-color: #27ae60;
+}
+
+.btn-success:hover {
+    background-color: #1e8449;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+}
+
+.btn-warning:hover {
+    background-color: #d68910;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-info {
+    background-color: #4CAF50;
+}
+
+.btn-info:hover {
+    background-color: #1e8449;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+/* Tabela */
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+table.display {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table.display thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table.display th, table.display td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table.display tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table.display tbody tr:hover {
+    background-color: #eef2f5;
+}
+
+/* Badge de pet */
+.pet-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+}
+
+.pet-badge.dog { background-color: #e67e22; }
+.pet-badge.cat { background-color: #9b59b6; }
+.pet-badge.bird { background-color: #2980b9; }
+.pet-badge.other { background-color: #7f8c8d; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
