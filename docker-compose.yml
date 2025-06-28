@@ -11,8 +11,8 @@ services:
     environment:
       # Passando as variáveis que o código Java irá procurar
       DB_HOST: postgres # <-- MUDANÇA (Usa o nome do serviço, não o container_name)
-      DB_NAME: deskpet
-      DB_USER: postgres
+      DB_NAME: "deskpet"
+      DB_USER: "postgres"
       DB_PASS: "94786422Wp$" # <-- MUDANÇA
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
     # O container_name é opcional, a comunicação é feita pelo nome do serviço ('db')
     container_name: db_postgres
     environment:
-      POSTGRES_DB: deskpet
+      POSTGRES_DB: "deskpet"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "94786422Wp$" # <-- MUDANÇA
     volumes:
